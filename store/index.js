@@ -1,0 +1,19 @@
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import promiseMiddleware from 'redux-promise'
+import rootReducer from './reducers'
+
+const exampleInitialState = {
+    users: [{
+        name: "Steve",
+        lastname: "Jones"
+    }]
+}
+
+export function initializeStore(initialState = exampleInitialState) {
+    return createStore(
+        rootReducer,
+        initialState,
+        composeWithDevTools(applyMiddleware(promiseMiddleware))
+    )
+}
